@@ -8,6 +8,7 @@ import { Heading } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 
 export default function Home(){
+    const key = import.meta.env.VITE_SOME_KEY
     const [data,setData] = React.useState({
         celcius:"20",
         city:"Kathmandu",
@@ -21,7 +22,7 @@ export default function Home(){
     const [error,setError] = React.useState("");
 
     function handleClick(){
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=d63e6c73f28bf53833981fdf032557d5&units=metric`
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${key}&units=metric`
         axios.get(url)
         .then(res => {
             setData(prevData => {
