@@ -15,7 +15,7 @@ export default function Home(){
         country:"NP",
         humidity:"30",
         wind:"3",
-        image:"src/assets/Clouds.png"
+        image:"src/assets/clouds.png"
     })
 
     const [name,setName] = React.useState("");
@@ -33,7 +33,7 @@ export default function Home(){
                     country:res.data.sys.country,
                     humidity:res.data.main.humidity,
                     wind:res.data.wind.speed,
-                    image:`src/assets/${res.data.weather[0].main}.png`
+                    image:`src/assets/${res.data.weather[0].main.slice(0,1).toUpperCase() + res.data.weather[0].main.slice(1,res.data.weather[0].main.length)}.png`
                 }
             })
             setError("");
