@@ -6,8 +6,24 @@ import { IconButton } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { Heading } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
+import ClearImg from "../assets/clear.png"
+import CloudsImg from "../assets/clouds.png"
+import RainImg from "../assets/rain.png"
+import Drizzle from "../assets/drizzle.png"
+import Humidity from "../assets/humidity.png"
+import Snow from "../assets/snow.png"
+import Wind from "../assets/wind.png"
+
 
 export default function Home(){
+
+    const weatherStatus = {
+        clear: ClearImg,
+        cloud: CloudsImg,
+        rain: RainImg,
+        drizzle: Drizzle,
+        snow: Snow
+    }
     const key = import.meta.env.VITE_SOME_KEY
     const [data,setData] = React.useState({
         celcius:"20",
@@ -15,7 +31,7 @@ export default function Home(){
         country:"NP",
         humidity:"30",
         wind:"3",
-        image:"src/assets/clouds.png"
+        image: CloudsImg
     })
 
     const [name,setName] = React.useState("");
@@ -33,7 +49,7 @@ export default function Home(){
                     country:res.data.sys.country,
                     humidity:res.data.main.humidity,
                     wind:res.data.wind.speed,
-                    image:`src/assets/${res.data.weather[0].main.slice(0,1).toUpperCase() + res.data.weather[0].main.slice(1,res.data.weather[0].main.length)}.png`
+                    image: weatherStatus[res.data.weather[0].main.toLowerCase()]
                 }
             })
             setError("");
@@ -77,12 +93,12 @@ export default function Home(){
                 </Text>
                 <Box paddingTop="auto 2rem auto 2rem" display="flex" alignItems="center" justifyContent="space-between" className="data-container">
                     <Box flexDir="column" display="flex" alignItems="center" padding="50px" className="element">
-                        <img src="src/assets/humidity.png" alt="humidity-icon" />
+                        <img src={Humidity} alt="humidity-icon" />
                         <Text color="white">Humidity</Text>
                         <Text color="white">{Math.round(data.humidity) + "%"}</Text>
                     </Box>
                     <Box flexDir="column" display="flex" alignItems="center" padding="50px" className="element">
-                        <img src="src/assets/wind.png" alt="wind-icon" />
+                        <img src={Wind} alt="wind-icon" />
                         <Text color="white">Wind</Text>
                         <Text color="white">{Math.round(data.wind) + "km/h"}</Text>
 
